@@ -154,3 +154,22 @@ footer { flex-wrap: wrap; }
 }
 /* The orbit is circular; rotation only enlarged its overflow bounds. */
 .orbit { transform: none; }
+
+/* The name leads the introduction, with an independent responsive type scale. */
+.hero-name { font-size: clamp(3rem, 5.8vw, 4.75rem); line-height: 1.06; letter-spacing: -.06em; margin-bottom: 20px; }
+.hero-name > span, .hero-name > em { display: block; }
+.hero-name > span { font-size: .78em; margin-bottom: 5px; }
+.hero-tagline { font-size: 1.125rem; line-height: 1.6; font-weight: 600; color: #e0e8d7; margin: 0 0 20px; }
+.technology-list { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin: 0; }
+.technology-chip { display: inline-flex; align-items: center; gap: 9px; min-width: 0; max-width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid #303b40; border-radius: 7px; background: #181f22; color: #d8e0df; font-size: .875rem; line-height: 1.4; }
+.technology-chip img, .toolkit .technology-chip svg { flex-shrink: 0; width: 22px; height: 22px; margin: 0; object-fit: contain; }
+.technology-chip span { overflow-wrap: anywhere; }
+.technology-chip .logo-nextjs, .technology-chip .logo-flask, .technology-chip .logo-express { filter: invert(1); }
+@media (max-width: 1000px) {
+  .hero-name { font-size: clamp(3rem, 8vw, 5rem); }
+}
+@media (max-width: 420px) {
+  .hero-name { font-size: clamp(2rem, 10.3vw, 2.75rem); }
+  .hero-tagline { font-size: 1rem; }
+  .technology-chip { padding: 9px 10px; gap: 8px; }
+}

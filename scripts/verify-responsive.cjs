@@ -49,7 +49,7 @@ const server = http.createServer((request, response) => {
   const filename = path.resolve(root, 'dist', pathname === '/' ? 'index.html' : '.' + pathname);
   if (!filename.startsWith(path.join(root, 'dist') + path.sep)) { response.writeHead(403); response.end(); return; }
   try {
-    const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' };
+    const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' };
     response.setHeader('Content-Type', mime[path.extname(filename)] || 'application/octet-stream');
     response.end(fs.readFileSync(filename));
   } catch { response.writeHead(404); response.end('Not found'); }
@@ -142,6 +142,9 @@ async function verifyBrowser(name, executable, origin) {
     }
     const links = await evaluate(`(async () => {
       const failures=[];
+      for (const img of document.querySelectorAll('.technology-logo')) { img.loading='eager'; try { await img.decode(); } catch { failures.push('Technology icon failed: '+img.src); } }
+      if(document.querySelectorAll('.technology-chip').length !== 17) failures.push('Missing toolkit items');
+      if(!document.querySelector('.hero-name')?.textContent.includes('Vanaja Sudha')) failures.push('Missing prominent name');
       if(document.querySelector('.email-contact').getAttribute('href') !== 'mailto:24bds059@iiitdwd.ac.in') failures.push('Contact email');
       for(const a of document.querySelectorAll('a[href^="#"]')) if(!document.getElementById(a.hash.slice(1))) failures.push('Missing anchor: '+a.hash);
       const link=document.querySelector('a[download]');
