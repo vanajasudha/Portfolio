@@ -1,0 +1,10 @@
+﻿node_modules/
+dist/
+verification/
+.sites-checkout/
+.sites-runtime/
+*.tar.gz
+.env
+.env.*
+!.env.example
+outputs/
